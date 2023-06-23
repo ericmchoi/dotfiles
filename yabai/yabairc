@@ -1,0 +1,3 @@
+yabai -m config layout bsp \
+                window_gap 4
+yabai -m rule --add app!="^(Google Chrome|WezTerm)$" manage=off
