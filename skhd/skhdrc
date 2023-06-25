@@ -1,9 +1,23 @@
-ctrl + cmd - h : yabai -m window --focus west
-ctrl + cmd - j : yabai -m window --focus south
-ctrl + cmd - k : yabai -m window --focus north
-ctrl + cmd - l : yabai -m window --focus east
+:: default
+:: prefix @
 
-ctrl + shift + cmd - h : yabai -m window --swap west
-ctrl + shift + cmd - j : yabai -m window --swap south
-ctrl + shift + cmd - k : yabai -m window --swap north
-ctrl + shift + cmd - l : yabai -m window --swap east
+ctrl + cmd - a ; prefix
+prefix < escape ; default
+
+prefix < h : yabai -m window --focus west; skhd -k "escape"
+prefix < j : yabai -m window --focus south; skhd -k "escape"
+prefix < k : yabai -m window --focus north; skhd -k "escape"
+prefix < l : yabai -m window --focus east; skhd -k "escape"
+
+prefix < shift - h : yabai -m window --swap west; skhd -k "escape"
+prefix < shift - j : yabai -m window --swap south; skhd -k "escape"
+prefix < shift - k : yabai -m window --swap north; skhd -k "escape"
+prefix < shift - l : yabai -m window --swap east; skhd -k "escape"
+
+prefix < 1 : yabai -m window --space 1; skhd -k "escape"
+prefix < 2 : yabai -m window --space 2; skhd -k "escape"
+prefix < 3 : yabai -m window --space 3; skhd -k "escape"
+prefix < 4 : yabai -m window --space 4; skhd -k "escape"
+prefix < 5 : yabai -m window --space 5; skhd -k "escape"
+
+prefix < f : yabai -m window --toggle zoom-fullscreen; skhd -k "escape"
