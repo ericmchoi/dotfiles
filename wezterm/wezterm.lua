@@ -1,4 +1,4 @@
-local wezterm = require 'wezterm'
+local wezterm = require("wezterm")
 
 local config = {}
 
@@ -8,7 +8,7 @@ end
 
 config.quit_when_all_windows_are_closed = false
 config.window_decorations = "RESIZE"
-config.harfbuzz_features = { 'calt=0' }
+config.harfbuzz_features = { "calt=0" }
 
 config.force_reverse_video_cursor = true
 config.colors = {
