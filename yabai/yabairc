@@ -1,3 +1,10 @@
+ALLOWED_APPS=(
+    "Discord"
+    "Google Chrome"
+    "Slack"
+    "WezTerm"
+)
+
 yabai -m config layout bsp \
                 window_gap 4
-yabai -m rule --add app!="^(Google Chrome|Discord|WezTerm)$" manage=off
+yabai -m rule --add app!="^($(IFS="|" ; echo "${ALLOWED_APPS[*]}"))$" manage=off
