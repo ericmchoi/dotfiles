@@ -7,6 +7,7 @@ if wezterm.config_builder then
 end
 
 config.quit_when_all_windows_are_closed = false
+config.hide_tab_bar_if_only_one_tab = true
 config.window_decorations = "RESIZE"
 config.harfbuzz_features = { "calt=0" }
 
