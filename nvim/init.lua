@@ -31,17 +31,16 @@ require("lazy").setup({
     "tpope/vim-sleuth",
     -- LSP
     {
-        "VonHeikemen/lsp-zero.nvim",
+        "neovim/nvim-lspconfig",
         dependencies = {
-            "neovim/nvim-lspconfig",
-            {
-                "williamboman/mason.nvim",
-                build = function()
-                    require("mason.api.command").MasonUpdate()
-                end,
-            },
+            "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
-            "hrsh7th/nvim-cmp",
+        },
+    },
+    -- completion
+    {
+        "hrsh7th/nvim-cmp",
+        dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "L3MON4D3/LuaSnip",
         },
@@ -90,25 +89,83 @@ vim.keymap.set("n", "<leader>fg", require("telescope.builtin").live_grep, {})
 vim.keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, {})
 vim.keymap.set("n", "<leader>fh", require("telescope.builtin").help_tags, {})
 
-local lsp = require("lsp-zero").preset({})
-
-lsp.on_attach(function(_, bufnr)
-    lsp.default_keymaps({ buffer = bufnr })
-    lsp.buffer_autoformat()
-end)
-
-require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
-
-lsp.setup()
-
--- You need to setup `cmp` after lsp-zero
-local cmp = require("cmp")
-local cmp_action = require("lsp-zero").cmp_action()
-
-cmp.setup({
-    mapping = {
-        -- Navigate between snippet placeholder
-        ["<C-f>"] = cmp_action.luasnip_jump_forward(),
-        ["<C-b>"] = cmp_action.luasnip_jump_backward(),
+require("mason").setup()
+require("mason-lspconfig").setup({
+    handlers = {
+        function(server_name)
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+            require("lspconfig")[server_name].setup({
+                capabilities = capabilities,
+            })
+        end,
+        ["lua_ls"] = function()
+            require("lspconfig").lua_ls.setup({
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = { "vim" },
+                        },
+                    },
+                },
+            })
+        end,
     }
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("LSP", {}),
+    callback = function(event)
+        local opts = { buffer = event.buf }
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+        vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+        vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
+        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+        vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+        vim.keymap.set("n", "<leader>cf", function()
+            vim.lsp.buf.format { async = true }
+        end, opts)
+    end,
+})
+
+local cmp = require("cmp")
+local luasnip = require("luasnip")
+cmp.setup({
+    snippet = {
+        expand = function(args)
+            luasnip.lsp_expand(args.body)
+        end,
+    },
+    mapping = cmp.mapping.preset.insert({
+        ["<CR>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+        }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expand_or_locally_jumpable() then
+                luasnip.expand_or_jump()
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.locally_jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+    }),
+    sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+    }),
 })
