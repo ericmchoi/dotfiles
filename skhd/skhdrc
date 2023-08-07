@@ -20,4 +20,6 @@ prefix < 3 : yabai -m window --space 3; skhd -k "escape"
 prefix < 4 : yabai -m window --space 4; skhd -k "escape"
 prefix < 5 : yabai -m window --space 5; skhd -k "escape"
 
-prefix < f : yabai -m window --toggle zoom-fullscreen; skhd -k "escape"
+prefix < 0x18 : yabai -m space --balance; skhd -k "escape"
+prefix < f : yabai -m window --toggle float; skhd -k "escape"
+prefix < space : yabai -m window --toggle zoom-fullscreen; skhd -k "escape"
