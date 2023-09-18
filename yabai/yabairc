@@ -1,6 +1,6 @@
 ALLOWED_APPS=(
     "Discord"
-    "Google Chrome"
+    "Firefox"
     "Slack"
     "WezTerm"
 )
