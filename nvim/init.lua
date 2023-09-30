@@ -110,6 +110,16 @@ require("mason-lspconfig").setup({
                 },
             })
         end,
+        ["clangd"] = function()
+            require("lspconfig").clangd.setup({
+                settings = {
+                    cmd = {
+                        "clangd",
+                        "--function-arg-placeholders=0",
+                    }
+                }
+            })
+        end
     }
 })
 
