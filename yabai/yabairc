@@ -7,4 +7,6 @@ ALLOWED_APPS=(
 
 yabai -m config layout bsp \
                 window_gap 4
+
 yabai -m rule --add app!="^($(IFS="|" ; echo "${ALLOWED_APPS[*]}"))$" manage=off
+yabai -m rule --add app="Discord" space=3
