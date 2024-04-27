@@ -11,6 +11,7 @@ config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.window_decorations = "RESIZE"
 config.harfbuzz_features = { "calt=0" }
+config.check_for_updates = false
 
 config.leader = { key = "a", mods = "SUPER", timeout_milliseconds = 1000 }
 config.keys = {
