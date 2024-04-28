@@ -1,12 +1,12 @@
-vim.opt.mouse = ""           -- turn mouse off
-vim.opt.scrolloff = 4        -- lines of context
-vim.opt.wrap = false         -- turn text wrap off
+vim.opt.mouse = "" -- turn mouse off
+vim.opt.scrolloff = 4 -- lines of context
+vim.opt.wrap = false -- turn text wrap off
 vim.opt.termguicolors = true -- enable 24-bit RGB color
 
 vim.opt.swapfile = false
 vim.opt.undofile = true
 
-vim.opt.hlsearch = false     -- turn off search highlights
+vim.opt.hlsearch = false -- turn off search highlights
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
