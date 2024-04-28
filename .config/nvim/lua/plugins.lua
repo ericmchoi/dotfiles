@@ -10,24 +10,16 @@ return {
     { "lewis6991/gitsigns.nvim", opts = {} },
     { "nvim-lualine/lualine.nvim", opts = {} },
     {
-        "nvim-telescope/telescope.nvim",
-        branch = "0.1.x",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-        },
+        "ibhagwan/fzf-lua",
         config = function()
-            local telescope = require("telescope")
-            telescope.load_extension("fzf")
-            telescope.setup({
-                pickers = { find_files = { find_command = { "rg", "--files", "--hidden", "-g", "!.git" } } },
-            })
-
-            vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, {})
-            vim.keymap.set("n", "<leader>fg", require("telescope.builtin").live_grep, {})
-            vim.keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, {})
-            vim.keymap.set("n", "<leader>fh", require("telescope.builtin").help_tags, {})
-        end,
+            require("fzf-lua").setup({})
+            vim.keymap.set("n", "<leader>ff", require('fzf-lua').files, {})
+            vim.keymap.set("n", "<leader>fg", function()
+                require('fzf-lua').live_grep({
+                    rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --hidden -g '!.git' -e"
+                })
+            end, {})
+        end
     },
     {
         "nvim-treesitter/nvim-treesitter",
