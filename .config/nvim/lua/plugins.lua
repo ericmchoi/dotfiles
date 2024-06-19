@@ -16,10 +16,10 @@ return {
             vim.keymap.set("n", "<leader>ff", require('fzf-lua').files, {})
             vim.keymap.set("n", "<leader>fg", function()
                 require('fzf-lua').live_grep({
-                    rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --hidden -g '!.git' -e"
+                    rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --hidden -g '!.git' -e",
                 })
             end, {})
-        end
+        end,
     },
     {
         "nvim-treesitter/nvim-treesitter",
@@ -128,6 +128,21 @@ return {
                     { name = "buffer" },
                 }),
             })
+        end,
+    },
+    {
+        "lervag/wiki.vim",
+        dependencies = {
+            "ibhagwan/fzf-lua",
+        },
+        config = function()
+            vim.g.wiki_root = "~/.wiki"
+            vim.keymap.set("n", "<leader>fw", function()
+                require('fzf-lua').live_grep({
+                    rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --hidden -g '!.git' -e",
+                    cwd = vim.g.wiki_root,
+                })
+            end, {})
         end,
     },
 }
