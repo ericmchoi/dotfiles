@@ -1,9 +1,9 @@
 return {
     {
-        "rebelot/kanagawa.nvim",
+        "HoNamDuong/hybrid.nvim",
         priority = 1000,
         init = function()
-            vim.cmd.colorscheme("kanagawa")
+            vim.cmd.colorscheme("hybrid")
         end,
     },
     "tpope/vim-sleuth",

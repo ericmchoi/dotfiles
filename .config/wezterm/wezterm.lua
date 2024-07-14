@@ -11,7 +11,6 @@ config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.window_decorations = "RESIZE"
 config.harfbuzz_features = { "calt=0" }
-config.check_for_updates = false
 
 config.font_size = 13.0
 
@@ -69,6 +68,10 @@ config.keys = {
   },
 }
 
-config.color_scheme = "Kanagawa (Gogh)"
+local hybrid_custom = wezterm.color.get_builtin_schemes()["Hybrid (terminal.sexy)"]
+hybrid_custom.background = "#1D1F21"
+
+config.color_schemes = { ["Hybrid (Custom)"] = hybrid_custom }
+config.color_scheme = "Hybrid (Custom)"
 
 return config
