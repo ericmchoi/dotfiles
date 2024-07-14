@@ -13,6 +13,8 @@ config.window_decorations = "RESIZE"
 config.harfbuzz_features = { "calt=0" }
 config.check_for_updates = false
 
+config.font_size = 13.0
+
 config.leader = { key = "a", mods = "SUPER", timeout_milliseconds = 1000 }
 config.keys = {
   {
