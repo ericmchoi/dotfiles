@@ -10,6 +10,8 @@ vim.opt.hlsearch = false -- turn off search highlights
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+vim.opt.pumheight = 8
+
 -- turn on line numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
