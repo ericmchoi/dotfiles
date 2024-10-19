@@ -13,7 +13,10 @@ config.window_decorations = "RESIZE"
 config.harfbuzz_features = { "calt=0" }
 config.check_for_updates = false
 
-config.font_size = 13.0
+config.font = wezterm.font("Hack")
+config.font_dirs = { "fonts" }
+config.font_size = 14.0
+config.front_end = "WebGpu"
 
 config.leader = { key = "a", mods = "SUPER", timeout_milliseconds = 1000 }
 config.keys = {
