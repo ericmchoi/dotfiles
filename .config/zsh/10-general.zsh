@@ -3,6 +3,13 @@ alias vim=nvim
 
 alias ll='ls -la'
 
+reset_mac_dock() {
+    defaults write com.apple.dock tilesize -int 32
+    defaults write com.apple.dock size-immutable -bool yes
+    defaults write com.apple.dock orientation left
+    killall Dock
+}
+
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
