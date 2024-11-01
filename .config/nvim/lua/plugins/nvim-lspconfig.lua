@@ -12,6 +12,7 @@ return {
                 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = event.buf })
                 vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = event.buf })
                 vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, { buffer = event.buf })
+                vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { buffer = event.buf })
                 vim.keymap.set("n", "rn", vim.lsp.buf.rename, { buffer = event.buf })
                 vim.keymap.set("n", "ca", vim.lsp.buf.code_action, { buffer = event.buf })
                 vim.keymap.set("n", "cf", vim.lsp.buf.format, { buffer = event.buf })
