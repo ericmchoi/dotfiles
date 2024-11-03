@@ -1,11 +1,4 @@
 return {
-    {
-        "rebelot/kanagawa.nvim",
-        priority = 1000,
-        init = function()
-            vim.cmd.colorscheme("kanagawa")
-        end,
-    },
     "tpope/vim-sleuth",
     { "lewis6991/gitsigns.nvim", opts = {} },
     { "nvim-lualine/lualine.nvim", opts = {} },

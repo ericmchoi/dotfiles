@@ -3,7 +3,7 @@ local wezterm = require("wezterm")
 local config = {}
 
 if wezterm.config_builder then
-  config = wezterm.config_builder()
+    config = wezterm.config_builder()
 end
 
 config.quit_when_all_windows_are_closed = false
@@ -20,58 +20,64 @@ config.front_end = "WebGpu"
 
 config.leader = { key = "a", mods = "SUPER", timeout_milliseconds = 1000 }
 config.keys = {
-  {
-    key = "v",
-    mods = "LEADER",
-    action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-  },
-  {
-    key = "s",
-    mods = "LEADER",
-    action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
-  },
-  {
-    key = "h",
-    mods = "LEADER",
-    action = wezterm.action.ActivatePaneDirection("Left"),
-  },
-  {
-    key = "j",
-    mods = "LEADER",
-    action = wezterm.action.ActivatePaneDirection("Down"),
-  },
-  {
-    key = "k",
-    mods = "LEADER",
-    action = wezterm.action.ActivatePaneDirection("Up"),
-  },
-  {
-    key = "l",
-    mods = "LEADER",
-    action = wezterm.action.ActivatePaneDirection("Right"),
-  },
-  {
-    key = "LeftArrow",
-    mods = "SUPER",
-    action = wezterm.action.AdjustPaneSize({ "Left", 10 }),
-  },
-  {
-    key = "RightArrow",
-    mods = "SUPER",
-    action = wezterm.action.AdjustPaneSize({ "Right", 10 }),
-  },
-  {
-    key = "UpArrow",
-    mods = "SUPER",
-    action = wezterm.action.AdjustPaneSize({ "Up", 10 }),
-  },
-  {
-    key = "DownArrow",
-    mods = "SUPER",
-    action = wezterm.action.AdjustPaneSize({ "Down", 10 }),
-  },
+    {
+        key = "v",
+        mods = "LEADER",
+        action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+    },
+    {
+        key = "s",
+        mods = "LEADER",
+        action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+    },
+    {
+        key = "h",
+        mods = "LEADER",
+        action = wezterm.action.ActivatePaneDirection("Left"),
+    },
+    {
+        key = "j",
+        mods = "LEADER",
+        action = wezterm.action.ActivatePaneDirection("Down"),
+    },
+    {
+        key = "k",
+        mods = "LEADER",
+        action = wezterm.action.ActivatePaneDirection("Up"),
+    },
+    {
+        key = "l",
+        mods = "LEADER",
+        action = wezterm.action.ActivatePaneDirection("Right"),
+    },
+    {
+        key = "LeftArrow",
+        mods = "SUPER",
+        action = wezterm.action.AdjustPaneSize({ "Left", 10 }),
+    },
+    {
+        key = "RightArrow",
+        mods = "SUPER",
+        action = wezterm.action.AdjustPaneSize({ "Right", 10 }),
+    },
+    {
+        key = "UpArrow",
+        mods = "SUPER",
+        action = wezterm.action.AdjustPaneSize({ "Up", 10 }),
+    },
+    {
+        key = "DownArrow",
+        mods = "SUPER",
+        action = wezterm.action.AdjustPaneSize({ "Down", 10 }),
+    },
 }
 
-config.color_scheme = "Kanagawa (Gogh)"
+local color_schemes = {
+    kanagawa = "Kanagawa (Gogh)",
+    kanagawabones = "Kanagawa (Gogh)",
+    rosebones = "Rosé Pine Dawn (Gogh)",
+}
+
+config.color_scheme = color_schemes[require("theme")]
 
 return config
